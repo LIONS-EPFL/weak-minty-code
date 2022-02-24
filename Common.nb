@@ -1,0 +1,334 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11920,        326]
+NotebookOptionsPosition[     11477,        310]
+NotebookOutlinePosition[     11965,        328]
+CellTagsIndexPosition[     11922,        325]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"getW", "[", "L_", "]"}], ":=", 
+    RowBox[{"Evaluate", "@", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"L", "[", 
+          RowBox[{"x", ",", "y"}], "]"}], ",", "x"}], "]"}], ",", 
+       RowBox[{"-", 
+        RowBox[{"D", "[", 
+         RowBox[{
+          RowBox[{"L", "[", 
+           RowBox[{"x", ",", "y"}], "]"}], ",", "y"}], "]"}]}]}], "}"}]}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"plotFlow", "[", 
+    RowBox[{"W_", ",", 
+     RowBox[{"side_", ":", 
+      RowBox[{"7", "/", "4"}]}]}], "]"}], ":=", "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", "y"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"StreamPlot", "[", 
+      RowBox[{
+       RowBox[{"Evaluate", "[", 
+        RowBox[{"-", 
+         RowBox[{"W", "[", 
+          RowBox[{"x", ",", "y"}], "]"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "side"}], ",", "side"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", 
+         RowBox[{"-", "side"}], ",", "side"}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"FrameLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<\!\(\*StyleBox[\"x\",FontSlant->\"Italic\"]\)\>\"", ",", 
+          "\"\<\!\(\*StyleBox[\"y\",FontSlant->\"Italic\"]\)\>\""}], "}"}]}], 
+       ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+       RowBox[{"StreamStyle", "\[Rule]", "Gray"}]}], "]"}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"getEquilibria", "[", 
+     RowBox[{"W_", ",", 
+      RowBox[{"side_", ":", 
+       RowBox[{"7", "/", "4"}]}]}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{",", "x", ",", "y"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"eqData", "=", 
+        RowBox[{"NSolve", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"W", "[", 
+              RowBox[{"x", ",", "y"}], "]"}], "\[LeftDoubleBracket]", "1", 
+             "\[RightDoubleBracket]"}], "\[Equal]", "0"}], "&&", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"W", "[", 
+              RowBox[{"x", ",", "y"}], "]"}], "\[LeftDoubleBracket]", "2", 
+             "\[RightDoubleBracket]"}], "\[Equal]", "0"}], "&&", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"-", "side"}], "\[LessEqual]", "x", "\[LessEqual]", 
+            "side"}], " ", "&&", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"-", "side"}], "\[LessEqual]", "y", "\[LessEqual]", 
+            "side"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}], "/.", "point"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"point", ",", "eqData"}], "}"}]}], "]"}]}]}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SolveFlow", "[", 
+     RowBox[{"W_", ",", "wstart_", ",", "horizon_"}], "]"}], ":=", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"NDSolve", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"w1", "'"}], "[", "t", "]"}], "\[Equal]", " ", 
+          RowBox[{"-", 
+           RowBox[{
+            RowBox[{"W", "[", 
+             RowBox[{
+              RowBox[{"w1", "[", "t", "]"}], ",", 
+              RowBox[{"w2", "[", "t", "]"}]}], "]"}], "\[LeftDoubleBracket]", 
+            "1", "\[RightDoubleBracket]"}]}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"w2", "'"}], "[", "t", "]"}], "\[Equal]", " ", 
+          RowBox[{"-", 
+           RowBox[{
+            RowBox[{"W", "[", 
+             RowBox[{
+              RowBox[{"w1", "[", "t", "]"}], ",", 
+              RowBox[{"w2", "[", "t", "]"}]}], "]"}], "\[LeftDoubleBracket]", 
+            "2", "\[RightDoubleBracket]"}]}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"w1", "[", "0", "]"}], "\[Equal]", 
+          RowBox[{
+          "wstart", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"w2", "[", "0", "]"}], "\[Equal]", 
+          RowBox[{
+          "wstart", "\[LeftDoubleBracket]", "2", 
+           "\[RightDoubleBracket]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"w1", ",", "w2"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "horizon"}], "}"}]}], "]"}], "//", "Flatten"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"plotTrajectory", "[", 
+     RowBox[{"W_", ",", 
+      RowBox[{"p_", ":", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "1"}], "}"}]}], ",", 
+      RowBox[{"k_", ":", "25"}], ",", 
+      RowBox[{"T_", ":", "25"}]}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "sol", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"sol", "=", 
+        RowBox[{"SolveFlow", "[", 
+         RowBox[{"W", ",", "p", ",", "T"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Show", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"plotFlow", "[", "W", "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"ParametricPlot", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"w1", "[", "t", "]"}], ",", 
+               RowBox[{"w2", "[", "t", "]"}]}], "}"}], "/.", "sol"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"t", ",", 
+              RowBox[{"T", "-", "k"}], ",", "T"}], "}"}], ",", 
+            RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}]}], "}"}], 
+        "]"}]}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"plotMultipleTrajectories", "[", 
+    RowBox[{"W_", ",", 
+     RowBox[{"stableInits_", ":", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "1"}], "}"}], "}"}]}], ",", 
+     RowBox[{"unstableInits_", ":", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "1"}], "}"}], "}"}]}], ",", 
+     RowBox[{"k_", ":", "25"}], ",", 
+     RowBox[{"T_", ":", "50"}], ",", 
+     RowBox[{"sides_", ":", 
+      RowBox[{"7", "/", "4"}]}], ",", 
+     RowBox[{"withEq_", ":", "True"}]}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Wreverse", ",", "stable", ",", " ", "unstable", ",", "eq"}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Wreverse", "[", 
+        RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
+       RowBox[{"-", 
+        RowBox[{"W", "[", 
+         RowBox[{"x", ",", "y"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"stable", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{"Function", "[", 
+          RowBox[{
+           RowBox[{"{", "p", "}"}], ",", 
+           RowBox[{"Module", "[", 
+            RowBox[{
+             RowBox[{"{", "sol", "}"}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"sol", " ", "=", 
+               RowBox[{"SolveFlow", "[", 
+                RowBox[{"W", ",", "p", ",", "T"}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"ParametricPlot", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"w1", "[", "t", "]"}], ",", 
+                   RowBox[{"w2", "[", "t", "]"}]}], "}"}], "/.", "sol"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"t", ",", 
+                  RowBox[{"T", "-", "k"}], ",", "T"}], "}"}], ",", 
+                RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}]}]}], 
+            "\[IndentingNewLine]", "]"}]}], "]"}], ",", "stableInits"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"unstable", "=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{"Function", "[", 
+          RowBox[{
+           RowBox[{"{", "p", "}"}], ",", 
+           RowBox[{"Module", "[", 
+            RowBox[{
+             RowBox[{"{", "sol", "}"}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"sol", " ", "=", 
+               RowBox[{"SolveFlow", "[", 
+                RowBox[{"Wreverse", ",", "p", ",", "T"}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"ParametricPlot", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"w1", "[", "t", "]"}], ",", 
+                   RowBox[{"w2", "[", "t", "]"}]}], "}"}], "/.", "sol"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"t", ",", 
+                  RowBox[{"T", "-", "k"}], ",", "T"}], "}"}], ",", 
+                RowBox[{"PlotStyle", "\[Rule]", "Blue"}]}], "]"}]}]}], 
+            "\[IndentingNewLine]", "]"}]}], "]"}], ",", "unstableInits"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"eq", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{"withEq", ",", 
+         RowBox[{"ListPlot", "[", 
+          RowBox[{
+           RowBox[{"getEquilibria", "[", 
+            RowBox[{"W", ",", 
+             RowBox[{"side", "=", "sides"}]}], "]"}], ",", 
+           RowBox[{"PlotStyle", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"Black", ",", 
+              RowBox[{"PointSize", "[", "0.02", "]"}]}], "}"}]}]}], "]"}], 
+         ",", 
+         RowBox[{"{", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Show", "[", 
+       RowBox[{"Join", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"plotFlow", "[", 
+            RowBox[{"W", ",", "sides"}], "]"}], ",", "eq"}], "}"}], ",", 
+         "stable", ",", "unstable"}], "]"}], "]"}]}]}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{
+  3.842070903988514*^9, {3.8420749739541807`*^9, 3.84207499682127*^9}, {
+   3.8421457953418217`*^9, 3.842145796360167*^9}, {3.842253224483932*^9, 
+   3.8422532787294197`*^9}, {3.842270588341518*^9, 3.8422705892363987`*^9}, {
+   3.8422708156222*^9, 3.842270815916088*^9}, {3.842273694648115*^9, 
+   3.8422737236345797`*^9}, {3.842273813430444*^9, 3.842273816554418*^9}},
+ CellLabel->"In[26]:=",ExpressionUUID->"f4af9529-5c6a-4965-86a9-7915bf7a492c"]
+},
+WindowSize->{808, 897},
+WindowMargins->{{Automatic, -51}, {Automatic, 18}},
+TaggingRules->{
+ "WelcomeScreenSettings" -> {"FEStarting" -> False}, "TryRealOnly" -> False},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"dc53407c-3c72-4ad6-accb-061f87bb880a"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 10915, 288, 985, "Input",ExpressionUUID->"f4af9529-5c6a-4965-86a9-7915bf7a492c"]
+}
+]
+*)
+
